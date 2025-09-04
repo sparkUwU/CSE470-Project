@@ -79,7 +79,7 @@ export default function FacultyDashboard() {
 
   return (
     <div className="p-8">
-      <h1 className="text-3xl font-bold mb-4">Faculty Dashboard</h1>
+      <h1 className="text-3xl font-bold mb-4" style={{ color: "var(--color-ink)" }}>Faculty Dashboard</h1>
       
       {/* Search Bar */}
       <div className="mb-6">
@@ -88,41 +88,40 @@ export default function FacultyDashboard() {
           placeholder="Search by student name, ID, project title, or description..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full p-3 rounded-lg"
+          style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }}
         />
       </div>
 
       {/* Results Count */}
-      <div className="mb-4 text-gray-600">
+      <div className="mb-4" style={{ color: "var(--color-ink-muted)" }}>
         Showing {filteredProjects.length} of {projects.length} projects
       </div>
 
       {/* Projects List */}
       {filteredProjects.length === 0 ? (
-        <div className="text-center py-8 text-gray-500">
+        <div className="text-center py-8" style={{ color: "var(--color-ink-muted)" }}>
           {searchQuery ? "No projects match your search." : "No projects found."}
         </div>
       ) : (
         filteredProjects.map(p => (
-          <div key={p._id} className="border p-6 mb-6 rounded-lg bg-white dark:bg-gray-800 shadow-sm">
+          <div key={p._id} className="border p-6 mb-6 rounded-lg app-surface shadow-sm">
             {/* Project Header */}
             <div className="flex justify-between items-start mb-4">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{p.title}</h2>
-                <p className="text-gray-600 dark:text-gray-400 mt-1">
+                <h2 className="text-2xl font-bold" style={{ color: "var(--color-ink)" }}>{p.title}</h2>
+                <p className="mt-1" style={{ color: "var(--color-ink-muted)" }}>
                   <strong>Student:</strong> {p.student.name} ({p.student.studentID})
                 </p>
-                <p className="text-gray-600 dark:text-gray-400">
+                <p style={{ color: "var(--color-ink-muted)" }}>
                   <strong>Email:</strong> {p.student.email}
                 </p>
               </div>
               <div className="text-right">
-                <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                  p.approved ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
-                }`}>
+                <span className="px-3 py-1 rounded-full text-sm font-medium" style={{ background: "var(--color-surface)", color: "var(--color-ink)" }}>
                   {p.approved ? "Approved" : "Pending Approval"}
                 </span>
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-sm mt-1" style={{ color: "var(--color-ink-muted)" }}>
                   Submitted: {new Date(p.createdAt).toLocaleDateString()}
                 </p>
               </div>
@@ -130,29 +129,29 @@ export default function FacultyDashboard() {
 
             {/* Project Description */}
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">Project Description</h3>
-              <p className="text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700 p-3 rounded">
+              <h3 className="text-lg font-semibold mb-2" style={{ color: "var(--color-ink)" }}>Project Description</h3>
+              <p className="p-3 rounded" style={{ background: "var(--color-surface)", color: "var(--color-ink)" }}>
                 {p.description}
               </p>
             </div>
 
             {/* Project Features & Progress */}
             <div className="mb-6">
-              <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-gray-100">Project Features & Progress</h3>
+              <h3 className="text-lg font-semibold mb-3" style={{ color: "var(--color-ink)" }}>Project Features & Progress</h3>
               {p.features && p.features.length > 0 ? (
                 <div>
                   {/* Progress Bar */}
                   <div className="mb-3">
                     <div className="flex justify-between items-center mb-1">
-                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Progress</span>
-                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                      <span className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Progress</span>
+                      <span className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>
                         {calculateProgress(p.features)}%
                       </span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                    <div className="w-full rounded-full h-2.5" style={{ background: "var(--color-surface)" }}>
                       <div 
-                        className="bg-blue-600 h-2.5 rounded-full transition-all duration-300" 
-                        style={{ width: `${calculateProgress(p.features)}%` }}
+                        className="h-2.5 rounded-full transition-all duration-300" 
+                        style={{ background: "var(--color-primary)", width: `${calculateProgress(p.features)}%` }}
                       ></div>
                     </div>
                   </div>
@@ -160,21 +159,17 @@ export default function FacultyDashboard() {
                   {/* Features List */}
                   <div className="space-y-2">
                     {p.features.map((feature, index) => (
-                      <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700 rounded">
+                      <div key={index} className="flex items-center space-x-3 p-3 rounded" style={{ background: "var(--color-surface)" }}>
                         <input
                           type="checkbox"
                           checked={feature.completed}
                           disabled
-                          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                          className="w-4 h-4 rounded"
                         />
-                        <span className={`flex-1 ${feature.completed ? 'line-through text-gray-500' : 'text-gray-700 dark:text-gray-300'}`}>
+                        <span className={`flex-1 ${feature.completed ? 'line-through' : ''}`} style={{ color: "var(--color-ink)" }}>
                           {feature.name}
                         </span>
-                        <span className={`text-xs px-2 py-1 rounded-full ${
-                          feature.completed 
-                            ? 'bg-green-100 text-green-800' 
-                            : 'bg-gray-100 text-gray-800'
-                        }`}>
+                        <span className="text-xs px-2 py-1 rounded-full" style={{ background: "var(--color-bg)", color: "var(--color-ink)" }}>
                           {feature.completed ? 'Completed' : 'Pending'}
                         </span>
                       </div>
@@ -182,19 +177,20 @@ export default function FacultyDashboard() {
                   </div>
                 </div>
               ) : (
-                <p className="text-gray-500 italic">No features defined for this project.</p>
+                <p className="italic" style={{ color: "var(--color-ink-muted)" }}>No features defined for this project.</p>
               )}
             </div>
 
             {/* Final Submission Link */}
             {p.finalLink && (
-              <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                <h3 className="text-lg font-semibold mb-2 text-blue-900 dark:text-blue-100">Final Submission</h3>
+              <div className="mb-6 p-4 rounded-lg border app-surface">
+                <h3 className="text-lg font-semibold mb-2" style={{ color: "var(--color-ink)" }}>Final Submission</h3>
                 <a 
                   href={p.finalLink} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-800 underline break-all font-medium"
+                  className="underline break-all font-medium"
+                  style={{ color: "var(--color-primary)" }}
                 >
                   {p.finalLink}
                 </a>
@@ -203,33 +199,33 @@ export default function FacultyDashboard() {
 
             {/* Existing Feedback & Marks */}
             {p.facultyFeedback && (
-              <div className="mb-4 p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
-                <h4 className="font-semibold text-yellow-900 dark:text-yellow-100 mb-1">Your Previous Feedback</h4>
-                <p className="text-yellow-800 dark:text-yellow-200">{p.facultyFeedback}</p>
+              <div className="mb-4 p-3 rounded-lg border" style={{ background: "#fef9c3", borderColor: "#fde68a" }}>
+                <h4 className="font-semibold mb-1" style={{ color: "#713f12" }}>Your Previous Feedback</h4>
+                <p style={{ color: "#854d0e" }}>{p.facultyFeedback}</p>
               </div>
             )}
 
             {p.marks > 0 && (
-              <div className="mb-4 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
-                <h4 className="font-semibold text-green-900 dark:text-green-100 mb-1">Assigned Marks</h4>
-                <p className="text-green-800 dark:text-green-200 text-lg font-bold">{p.marks}/20</p>
+              <div className="mb-4 p-3 rounded-lg border" style={{ background: "#dcfce7", borderColor: "#86efac" }}>
+                <h4 className="font-semibold mb-1" style={{ color: "#065f46" }}>Assigned Marks</h4>
+                <p className="text-lg font-bold" style={{ color: "#065f46" }}>{p.marks}/20</p>
               </div>
             )}
 
             {/* Approval Actions */}
             {!p.approved && (
-              <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-gray-100">Project Approval</h3>
+              <div className="mb-6 p-4 rounded-lg app-surface">
+                <h3 className="text-lg font-semibold mb-3" style={{ color: "var(--color-ink)" }}>Project Approval</h3>
                 <div className="flex space-x-3">
                   <button 
                     onClick={() => handleApprove(p._id, true)} 
-                    className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+                    className="btn btn-primary"
                   >
                     ✅ Approve Project
                   </button>
                   <button 
                     onClick={() => handleApprove(p._id, false)} 
-                    className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+                    className="btn btn-outline"
                   >
                     ❌ Reject & Delete
                   </button>
@@ -239,13 +235,14 @@ export default function FacultyDashboard() {
 
             {/* Feedback & Marks Form */}
             <div className="border-t pt-6">
-              <h3 className="text-lg font-semibold mb-3 text-gray-900 dark:text-gray-100">Add Feedback & Marks</h3>
+              <h3 className="text-lg font-semibold mb-3" style={{ color: "var(--color-ink)" }}>Add Feedback & Marks</h3>
               <div className="space-y-3">
                 <textarea
                   placeholder="Provide detailed feedback on the project..."
                   value={feedback[p._id] || ""}
                   onChange={e => setFeedback({...feedback, [p._id]: e.target.value})}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  className="w-full p-3 rounded-lg resize-none"
+                  style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }}
                   rows="4"
                 />
                 <div className="flex items-center space-x-3">
@@ -256,11 +253,12 @@ export default function FacultyDashboard() {
                     max="20"
                     value={marks[p._id] || ""}
                     onChange={e => setMarks({...marks, [p._id]: e.target.value})}
-                    className="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="flex-1 p-3 rounded-lg"
+                    style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }}
                   />
                   <button 
                     onClick={() => handleFeedback(p._id)} 
-                    className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                    className="btn btn-primary font-medium"
                   >
                     Submit Feedback
                   </button>

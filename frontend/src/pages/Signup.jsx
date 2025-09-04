@@ -33,12 +33,12 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 dark:bg-gray-900 py-20">
-      <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-96">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-gray-100">Sign Up</h2>
+    <div className="flex justify-center items-center min-h-screen py-20" style={{ background: "var(--color-bg)" }}>
+      <form onSubmit={handleSubmit} className="p-8 rounded-lg shadow-lg w-96 app-surface border">
+        <h2 className="text-2xl font-bold mb-6 text-center" style={{ color: "var(--color-ink)" }}>Sign Up</h2>
         
         {error && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+          <div className="mb-4 p-3 rounded" style={{ background: "#fee2e2", border: "1px solid #fca5a5", color: "#991b1b" }}>
             {error}
           </div>
         )}
@@ -49,7 +49,8 @@ export default function Signup() {
             placeholder="Full Name" 
             value={name} 
             onChange={e => setName(e.target.value)} 
-            className="w-full p-3 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent" 
+            className="w-full p-3 rounded"
+            style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }}
             required
           />
         </div>
@@ -60,7 +61,8 @@ export default function Signup() {
             placeholder="Email" 
             value={email} 
             onChange={e => setEmail(e.target.value)} 
-            className="w-full p-3 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent" 
+            className="w-full p-3 rounded"
+            style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }}
             required
           />
         </div>
@@ -71,7 +73,8 @@ export default function Signup() {
             placeholder="Password" 
             value={password} 
             onChange={e => setPassword(e.target.value)} 
-            className="w-full p-3 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent" 
+            className="w-full p-3 rounded"
+            style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }}
             required
           />
         </div>
@@ -82,7 +85,8 @@ export default function Signup() {
             placeholder="Student ID" 
             value={studentID} 
             onChange={e => setStudentID(e.target.value)} 
-            className="w-full p-3 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-green-500 focus:border-transparent" 
+            className="w-full p-3 rounded"
+            style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }}
             required
           />
         </div>
@@ -90,14 +94,14 @@ export default function Signup() {
         <button 
           type="submit" 
           disabled={loading}
-          className="w-full bg-green-600 text-white p-3 rounded hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+          className="w-full btn btn-primary disabled:opacity-50 disabled:cursor-not-allowed font-medium"
         >
           {loading ? "Creating Account..." : "Sign Up"}
         </button>
         
-        <p className="mt-4 text-center text-gray-600 dark:text-gray-400">
+        <p className="mt-4 text-center" style={{ color: "var(--color-ink-muted)" }}>
           Already have an account?{" "}
-          <a href="/login" className="text-green-600 hover:underline">Login</a>
+          <a href="/login" className="hover:underline" style={{ color: "var(--color-primary)" }}>Login</a>
         </p>
       </form>
     </div>

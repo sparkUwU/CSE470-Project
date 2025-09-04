@@ -31,12 +31,12 @@ export default function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 dark:bg-gray-900 py-20">
-      <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-96">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-gray-100">Login</h2>
+    <div className="flex justify-center items-center min-h-screen py-20" style={{ background: "var(--color-bg)" }}>
+      <form onSubmit={handleSubmit} className="p-8 rounded-lg shadow-lg w-96 app-surface border">
+        <h2 className="text-2xl font-bold mb-6 text-center" style={{ color: "var(--color-ink)" }}>Login</h2>
         
         {error && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+          <div className="mb-4 p-3 rounded" style={{ background: "#fee2e2", border: "1px solid #fca5a5", color: "#991b1b" }}>
             {error}
           </div>
         )}
@@ -47,7 +47,8 @@ export default function Login() {
             placeholder="Email" 
             value={email} 
             onChange={e => setEmail(e.target.value)} 
-            className="w-full p-3 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+            className="w-full p-3 rounded"
+            style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }}
             required
           />
         </div>
@@ -58,7 +59,8 @@ export default function Login() {
             placeholder="Password" 
             value={password} 
             onChange={e => setPassword(e.target.value)} 
-            className="w-full p-3 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+            className="w-full p-3 rounded"
+            style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }}
             required
           />
         </div>
@@ -66,14 +68,14 @@ export default function Login() {
         <button 
           type="submit" 
           disabled={loading}
-          className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+          className="w-full btn btn-primary disabled:opacity-50 disabled:cursor-not-allowed font-medium"
         >
           {loading ? "Logging in..." : "Login"}
         </button>
         
-        <p className="mt-4 text-center text-gray-600 dark:text-gray-400">
+        <p className="mt-4 text-center" style={{ color: "var(--color-ink-muted)" }}>
           Don't have an account?{" "}
-          <a href="/signup" className="text-blue-600 hover:underline">Sign up</a>
+          <a href="/signup" className="hover:underline" style={{ color: "var(--color-primary)" }}>Sign up</a>
         </p>
       </form>
     </div>

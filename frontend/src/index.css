@@ -1,28 +1,41 @@
 @import "tailwindcss";
 
+/*
+  Global palette variables (light by default)
+  Light:  bg:#F9F7F7  surface:#DBE2EF  primary:#3F72AF  ink:#112D4E
+*/
 :root {
+  --color-bg: #F9F7F7;
+  --color-surface: #DBE2EF;
+  --color-primary: #3F72AF;
+  --color-primary-600: #2f5a8a;
+  --color-ink: #112D4E;
+  --color-ink-muted: #334e7a;
+
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Dark mode styles */
+/* Dark theme overrides via CSS variables */
 .dark {
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #0f172a;
+  --color-bg: #0f172a;            /* slate-900 base for contrast */
+  --color-surface: #1e293b;       /* slate-800 */
+  --color-primary: #60a5fa;       /* blue-400 for dark */
+  --color-primary-600: #3b82f6;   /* blue-500 */
+  --color-ink: #e5e7eb;           /* gray-200 */
+  --color-ink-muted: #9ca3af;     /* gray-400 */
 }
 
-/* Light mode styles */
-:root:not(.dark) {
-  color: #213547;
-  background-color: #ffffff;
+/* Base document colors driven by variables */
+html, body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
 }
 
 body {
@@ -31,39 +44,100 @@ body {
   min-height: 100vh;
 }
 
+/* Layout helpers */
+.container {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Minimal UI components tied to palette */
+.app-surface {
+  background-color: var(--color-surface);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  font-weight: 600;
+  transition: background-color 150ms, color 150ms, border-color 150ms, box-shadow 150ms;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+.btn-primary:hover {
+  background-color: var(--color-primary-600);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-surface);
+}
+.btn-outline:hover {
+  background-color: var(--color-surface);
+}
+
+.brand {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+
+/* Toggle switch */
+.theme-toggle {
+  position: relative;
+  width: 3rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  background: var(--color-surface);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.theme-toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  background: white;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  transition: transform 200ms ease;
+}
+.dark .theme-toggle-knob {
+  transform: translateX(1.25rem);
+  background: #0b1220;
+}
+
+/* Forms inherit typography */
+input, textarea, select, button {
+  font-family: inherit;
+}
+
+/* Link styles aligned to palette */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover { color: var(--color-primary-600); }
+
+/* Focus styles */
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 /* Remove conflicting styles for auth pages */
 .auth-page {
   display: flex;
   place-items: center;
-}
-
-/* Form styles */
-input, textarea, select {
-  font-family: inherit;
-}
-
-/* Button focus styles */
-button:focus-visible {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
-}
-
-/* Link styles */
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-
-a:hover {
-  color: #535bf2;
-}
-
-/* Dark mode link colors */
-.dark a {
-  color: #60a5fa;
-}
-
-.dark a:hover {
-  color: #93c5fd;
 }

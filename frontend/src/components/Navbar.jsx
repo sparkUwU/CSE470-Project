@@ -39,41 +39,42 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full border-b bg-white dark:bg-gray-900 dark:text-gray-100">
-      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        <Link to={user ? "/dashboard" : "/"} className="font-bold">CSE470</Link>
+    <nav className="w-full" style={{ backgroundColor: "var(--color-bg)", color: "var(--color-ink)", borderBottom: "1px solid var(--color-surface)" }}>
+      <div className="container" style={{ paddingTop: "0.75rem", paddingBottom: "0.75rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <Link to={user ? "/dashboard" : "/"} className="brand">CSE470</Link>
 
-        <div className="flex items-center gap-3">
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
           <button
+            aria-label="Toggle theme"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="px-3 py-1 rounded border dark:border-gray-700"
+            className="theme-toggle"
           >
-            {theme === "dark" ? "Light" : "Dark"}
+            <span className="theme-toggle-knob" />
           </button>
 
           {!user && (
             <>
-              <Link to="/login" className="px-3 py-1 rounded border">Login</Link>
-              <Link to="/signup" className="px-3 py-1 rounded bg-blue-600 text-white">Signup</Link>
+              <Link to="/login" className="btn btn-outline">Login</Link>
+              <Link to="/signup" className="btn btn-primary">Signup</Link>
             </>
           )}
 
           {user && (
-            <div className="flex items-center gap-2">
-              <Link to="/dashboard" className="px-2">Dashboard</Link>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
+              <Link to="/dashboard" className="btn btn-outline">Dashboard</Link>
               {user.role === "student" && (
-                <Link to="/submit" className="px-2">Submit Idea</Link>
+                <Link to="/submit" className="btn btn-outline">Submit Idea</Link>
               )}
               {user.role === "student" && (
-                <Link to="/final-submit" className="px-2">Final Submit</Link>
+                <Link to="/final-submit" className="btn btn-outline">Final Submit</Link>
               )}
-              <Link to="/final-marks" className="px-2">Final Marks</Link>
-              <Link to="/announcements" className="px-2">Announcements</Link>
+              <Link to="/final-marks" className="btn btn-outline">Final Marks</Link>
+              <Link to="/announcements" className="btn btn-outline">Announcements</Link>
               {user.role === "faculty" && (
-                <Link to="/admin" className="px-2">Faculty</Link>
+                <Link to="/admin" className="btn btn-outline">Faculty</Link>
               )}
-              <Link to="/profile" className="px-2">Profile</Link>
-              <button onClick={handleLogout} className="px-2 rounded border">Logout</button>
+              <Link to="/profile" className="btn btn-outline">Profile</Link>
+              <button onClick={handleLogout} className="btn btn-outline">Logout</button>
             </div>
           )}
         </div>

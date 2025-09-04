@@ -54,52 +54,55 @@ export default function Announcements() {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Announcements</h1>
+      <h1 className="text-2xl font-bold mb-4" style={{ color: "var(--color-ink)" }}>Announcements</h1>
       
       {error && (
-        <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+        <div className="mb-4 p-3 rounded" style={{ background: "#fee2e2", border: "1px solid #fca5a5", color: "#991b1b" }}>
           {error}
         </div>
       )}
 
       {user?.role === "faculty" && (
-        <form onSubmit={create} className="mb-6 border p-4 rounded bg-gray-50 dark:bg-gray-800">
-          <h2 className="font-semibold mb-3">Create New Announcement</h2>
+        <form onSubmit={create} className="mb-6 border p-4 rounded app-surface">
+          <h2 className="font-semibold mb-3" style={{ color: "var(--color-ink)" }}>Create New Announcement</h2>
           <input 
-            className="border p-2 w-full mb-2" 
+            className="p-2 w-full mb-2 rounded"
+            style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }}
             placeholder="Title" 
             value={title} 
             onChange={e => setTitle(e.target.value)} 
             required
           />
           <textarea 
-            className="border p-2 w-full mb-2" 
+            className="p-2 w-full mb-2 rounded"
+            style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }}
             placeholder="Body" 
             value={body} 
             onChange={e => setBody(e.target.value)} 
             rows="3"
             required
           />
-          <button className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">
+          <button className="btn btn-primary">
             Post Announcement
           </button>
         </form>
       )}
 
       {items.length === 0 ? (
-        <p className="text-gray-500 text-center py-8">No announcements yet.</p>
+        <p className="text-center py-8" style={{ color: "var(--color-ink-muted)" }}>No announcements yet.</p>
       ) : (
         items.map(a => (
-          <div key={a._id} className="border rounded p-4 mb-3 bg-white dark:bg-gray-800">
+          <div key={a._id} className="border rounded p-4 mb-3 app-surface">
             <h2 className="font-semibold text-lg">{a.title}</h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+            <p className="text-sm mb-2" style={{ color: "var(--color-ink-muted)" }}>
               {new Date(a.createdAt).toLocaleString()}
             </p>
             <p className="mt-2 whitespace-pre-wrap">{a.body}</p>
             {user?.role === "faculty" && (
               <button 
                 onClick={() => remove(a._id)} 
-                className="mt-3 text-red-600 hover:text-red-800 px-2 py-1 rounded border border-red-300 hover:border-red-500"
+                className="mt-3 px-2 py-1 rounded"
+                style={{ color: "#991b1b", border: "1px solid #fecaca" }}
               >
                 Delete
               </button>

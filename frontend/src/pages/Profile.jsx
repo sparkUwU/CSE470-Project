@@ -73,7 +73,7 @@ export default function Profile() {
       <div className="max-w-xl mx-auto p-6">
         <div className="text-center">
           {error ? (
-            <div className="text-red-600">{error}</div>
+            <div style={{ color: "#991b1b" }}>{error}</div>
           ) : (
             <div>Loading profile...</div>
           )}
@@ -84,31 +84,33 @@ export default function Profile() {
 
   return (
     <div className="max-w-xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Profile</h1>
+      <h1 className="text-2xl font-bold mb-4" style={{ color: "var(--color-ink)" }}>Profile</h1>
       
       {message && (
-        <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded">
+        <div className="mb-4 p-3 rounded" style={{ background: "#dcfce7", border: "1px solid #86efac", color: "#166534" }}>
           {message}
         </div>
       )}
       
       {error && (
-        <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+        <div className="mb-4 p-3 rounded" style={{ background: "#fee2e2", border: "1px solid #fca5a5", color: "#991b1b" }}>
           {error}
         </div>
       )}
 
-      <form onSubmit={updateProfile} className="border p-4 rounded mb-6 bg-white dark:bg-gray-800">
-        <h2 className="font-semibold mb-3">Personal Information</h2>
+      <form onSubmit={updateProfile} className="border p-4 rounded mb-6 app-surface">
+        <h2 className="font-semibold mb-3" style={{ color: "var(--color-ink)" }}>Personal Information</h2>
         <input 
-          className="border p-2 w-full mb-3 rounded" 
+          className="p-2 w-full mb-3 rounded"
+          style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }} 
           placeholder="Name" 
           value={name} 
           onChange={e => setName(e.target.value)}
           required
         />
         <input 
-          className="border p-2 w-full mb-3 rounded" 
+          className="p-2 w-full mb-3 rounded"
+          style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }} 
           placeholder="Email" 
           type="email"
           value={email} 
@@ -117,7 +119,8 @@ export default function Profile() {
         />
         {user.role === "student" && (
           <input 
-            className="border p-2 w-full mb-3 rounded" 
+            className="p-2 w-full mb-3 rounded"
+            style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }} 
             placeholder="Student ID" 
             value={studentID} 
             onChange={e => setStudentID(e.target.value)}
@@ -127,16 +130,17 @@ export default function Profile() {
         <button 
           type="submit" 
           disabled={loading}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+          className="btn btn-primary disabled:opacity-50"
         >
           {loading ? "Saving..." : "Save Changes"}
         </button>
       </form>
 
-      <form onSubmit={changePassword} className="border p-4 rounded bg-white dark:bg-gray-800">
-        <h2 className="font-semibold mb-3">Change Password</h2>
+      <form onSubmit={changePassword} className="border p-4 rounded app-surface">
+        <h2 className="font-semibold mb-3" style={{ color: "var(--color-ink)" }}>Change Password</h2>
         <input 
-          className="border p-2 w-full mb-3 rounded" 
+          className="p-2 w-full mb-3 rounded"
+          style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }} 
           type="password" 
           placeholder="Current password" 
           value={currentPassword} 
@@ -144,7 +148,8 @@ export default function Profile() {
           required
         />
         <input 
-          className="border p-2 w-full mb-3 rounded" 
+          className="p-2 w-full mb-3 rounded"
+          style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }} 
           type="password" 
           placeholder="New password" 
           value={newPassword} 
@@ -154,13 +159,13 @@ export default function Profile() {
         <button 
           type="submit" 
           disabled={loading}
-          className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900 disabled:opacity-50"
+          className="btn btn-outline disabled:opacity-50"
         >
           {loading ? "Changing..." : "Change Password"}
         </button>
       </form>
 
-      <div className="mt-6 p-4 border rounded bg-gray-50 dark:bg-gray-700">
+      <div className="mt-6 p-4 border rounded app-surface">
         <h3 className="font-semibold mb-2">Account Information</h3>
         <p><strong>Role:</strong> {user.role === "faculty" ? "Faculty" : "Student"}</p>
         <p><strong>Member since:</strong> {new Date(user.createdAt).toLocaleDateString()}</p>

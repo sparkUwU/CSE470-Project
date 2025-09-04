@@ -18,13 +18,15 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={
-          <div className="flex justify-center items-center h-screen bg-gray-100 dark:bg-gray-900">
-            <div className="text-center">
-              <h1 className="text-4xl font-bold mb-4 text-gray-800 dark:text-gray-100">CSE470 Project Website</h1>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">Welcome to the project management system</p>
-              <div className="space-x-4">
-                <Link to="/login" className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Login</Link>
-                <Link to="/signup" className="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700">Signup</Link>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "calc(100vh - 64px)", background: "var(--color-bg)" }}>
+            <div className="container" style={{ textAlign: "center" }}>
+              <div style={{ margin: "0 auto", maxWidth: "42rem", padding: "2rem", borderRadius: "1rem" }} className="app-surface">
+                <h1 style={{ fontSize: "2.25rem", lineHeight: 1.2, fontWeight: 800, letterSpacing: "-0.02em", color: "var(--color-ink)" }}>CSE470 Project Website</h1>
+                <p style={{ marginTop: "0.75rem", color: "var(--color-ink-muted)" }}>Welcome to the project management system</p>
+                <div style={{ marginTop: "1.25rem", display: "flex", gap: "0.75rem", justifyContent: "center" }}>
+                  <Link to="/login" className="btn btn-outline">Login</Link>
+                  <Link to="/signup" className="btn btn-primary">Signup</Link>
+                </div>
               </div>
             </div>
           </div>

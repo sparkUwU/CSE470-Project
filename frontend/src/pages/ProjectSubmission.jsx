@@ -89,51 +89,53 @@ export default function ProjectSubmission() {
 
   return (
     <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">Submit Project Idea</h1>
-      {error && <div className="mb-4 p-3 bg-red-100 text-red-700 border border-red-400 rounded">{error}</div>}
-      <form onSubmit={handleSubmit} className="mb-6">
-        <input placeholder="Title" value={title} onChange={e => setTitle(e.target.value)} className="border p-2 mb-2 w-full" />
-        <textarea placeholder="Description" value={description} onChange={e => setDescription(e.target.value)} className="border p-2 mb-2 w-full" />
+      <h1 className="text-2xl font-bold mb-4" style={{ color: "var(--color-ink)" }}>Submit Project Idea</h1>
+      {error && <div className="mb-4 p-3 rounded" style={{ background: "#fee2e2", border: "1px solid #fca5a5", color: "#991b1b" }}>{error}</div>}
+      <form onSubmit={handleSubmit} className="mb-6 border p-4 rounded app-surface">
+        <input placeholder="Title" value={title} onChange={e => setTitle(e.target.value)} className="p-2 mb-2 w-full rounded" style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }} />
+        <textarea placeholder="Description" value={description} onChange={e => setDescription(e.target.value)} className="p-2 mb-2 w-full rounded" style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }} />
         {features.map((f, idx) => (
-          <input key={idx} placeholder="Feature" value={f.name} onChange={e => handleFeatureChange(idx, e.target.value)} className="border p-2 mb-2 w-full" />
+          <input key={idx} placeholder="Feature" value={f.name} onChange={e => handleFeatureChange(idx, e.target.value)} className="p-2 mb-2 w-full rounded" style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }} />
         ))}
-        <button type="button" onClick={addFeature} className="bg-gray-300 p-2 rounded mb-2">Add Feature</button>
-        <button type="submit" className="bg-blue-600 text-white p-2 rounded">Submit Project</button>
+        <div style={{ display: "flex", gap: "0.5rem" }}>
+          <button type="button" onClick={addFeature} className="btn btn-outline">Add Feature</button>
+          <button type="submit" className="btn btn-primary">Submit Project</button>
+        </div>
       </form>
 
-      <h2 className="text-xl font-bold mb-2">Your Projects</h2>
+      <h2 className="text-xl font-bold mb-2" style={{ color: "var(--color-ink)" }}>Your Projects</h2>
       {projects.map(p => (
-        <div key={p._id} className="border p-2 mb-2 rounded">
+        <div key={p._id} className="border p-4 mb-3 rounded app-surface">
           {editingId === p._id ? (
             <div className="mb-2">
-              <input className="border p-2 w-full mb-2" value={editFields.title} onChange={e => setEditFields({ ...editFields, title: e.target.value })} />
-              <textarea className="border p-2 w-full mb-2" value={editFields.description} onChange={e => setEditFields({ ...editFields, description: e.target.value })} />
+              <input className="p-2 w-full mb-2 rounded" style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }} value={editFields.title} onChange={e => setEditFields({ ...editFields, title: e.target.value })} />
+              <textarea className="p-2 w-full mb-2 rounded" style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }} value={editFields.description} onChange={e => setEditFields({ ...editFields, description: e.target.value })} />
               {editFields.features.map((f, idx) => (
-                <input key={idx} className="border p-2 w-full mb-2" value={f.name} onChange={e => updateEditFeature(idx, e.target.value)} />
+                <input key={idx} className="p-2 w-full mb-2 rounded" style={{ border: "1px solid var(--color-surface)", background: "var(--color-bg)", color: "var(--color-ink)" }} value={f.name} onChange={e => updateEditFeature(idx, e.target.value)} />
               ))}
-              <button type="button" onClick={addEditFeature} className="bg-gray-300 p-1 rounded mr-2">Add Feature</button>
-              <button type="button" onClick={saveEdit} className="bg-blue-600 text-white p-1 rounded mr-2">Save</button>
-              <button type="button" onClick={cancelEdit} className="bg-gray-500 text-white p-1 rounded">Cancel</button>
+              <button type="button" onClick={addEditFeature} className="btn btn-outline" style={{ marginRight: "0.5rem" }}>Add Feature</button>
+              <button type="button" onClick={saveEdit} className="btn btn-primary" style={{ marginRight: "0.5rem" }}>Save</button>
+              <button type="button" onClick={cancelEdit} className="btn btn-outline">Cancel</button>
             </div>
           ) : (
             <>
-              <h3 className="font-bold">{p.title}</h3>
-              <p>{p.description}</p>
+              <h3 className="font-bold" style={{ color: "var(--color-ink)" }}>{p.title}</h3>
+              <p style={{ color: "var(--color-ink-muted)" }}>{p.description}</p>
               <ul className="mt-2">
                 {p.features.map((f, idx) => (
                   <li key={idx} className="flex items-center gap-2">
                     <input type="checkbox" checked={!!f.completed} onChange={e => toggleFeature(p._id, idx, e.target.checked)} />
-                    <span>{f.name}</span>
+                    <span style={{ color: "var(--color-ink)" }}>{f.name}</span>
                   </li>
                 ))}
               </ul>
-              <div className="bg-gray-200 h-4 w-full rounded mt-2">
-                <div className="bg-green-500 h-4 rounded" style={{ width: calculateProgress(p) + "%" }}></div>
+              <div className="h-2.5 w-full rounded mt-2" style={{ background: "var(--color-surface)" }}>
+                <div className="h-2.5 rounded" style={{ background: "var(--color-primary)", width: calculateProgress(p) + "%" }}></div>
               </div>
-              <p>{calculateProgress(p)}% completed</p>
+              <p style={{ color: "var(--color-ink-muted)" }}>{calculateProgress(p)}% completed</p>
               <div className="mt-2 flex gap-2">
-                <button onClick={() => startEdit(p)} className="bg-yellow-500 text-white px-2 py-1 rounded">Edit</button>
-                <button onClick={() => removeProject(p._id)} className="bg-red-600 text-white px-2 py-1 rounded">Delete</button>
+                <button onClick={() => startEdit(p)} className="btn btn-outline">Edit</button>
+                <button onClick={() => removeProject(p._id)} className="btn btn-outline">Delete</button>
               </div>
             </>
           )}
