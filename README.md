@@ -2,6 +2,8 @@
 
 A comprehensive project management system for students and faculty with project submission, approval, and evaluation features.
 
+MADE BY ALAMGIR HASAN TANZID (ID: 24341188) 
+
 ## Features
 
 ### 🔐 Authentication & User Management
